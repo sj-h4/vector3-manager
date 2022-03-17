@@ -3,15 +3,17 @@ import 'package:flutter_blue/flutter_blue.dart';
 import 'dart:async';
 
 import '../entities/vector3.dart';
+import '../entities/vector3_profile.dart';
 
 class Vector3Repository {
   Vector3Repository() : super();
 
   final vector3StreamController = StreamController<Vector3>.broadcast();
   Vector3 vector3 = const Vector3(deviceStatus: "waiting", isConnected: false);
-  final String deviceName = 'V3 BLE:0442838';
-  final String serviceUUID = '00001818-0000-1000-8000-00805f9b34fb';
-  final String charactaristicUUID = '00002a63-0000-1000-8000-00805f9b34fb';
+  final String deviceName = Vector3NameProfile.vector3Name;
+  final String serviceUUID = Vector3ServicesProfile.vector3Service;
+  final String charactaristicUUID =
+      Vector3CharacteristicProfile.vector3Characteristic;
   FlutterBlue flutterBlue = FlutterBlue.instance;
   late BluetoothDevice targetDevice;
   late BluetoothCharacteristic bleCharactaristic;
