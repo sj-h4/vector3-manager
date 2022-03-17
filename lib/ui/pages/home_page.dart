@@ -11,10 +11,16 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('app'),
+        backgroundColor: Colors.white,
+        title: Image.asset(
+          'elba_img.png',
+          height: 50,
+          width: 50,
+        ),
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.settings),
+            color: Colors.black,
             onPressed: () => context.go('/settings'),
           ),
         ],

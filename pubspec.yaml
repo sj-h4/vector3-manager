@@ -16,6 +16,7 @@ dependencies:
   go_router: ^3.0.1
   cupertino_icons: ^1.0.2
   flutter_blue: ^0.8.0
+  syncfusion_flutter_gauges: ^19.2.46
 
 dev_dependencies:
   flutter_test:
@@ -27,3 +28,5 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/elba_img.png
