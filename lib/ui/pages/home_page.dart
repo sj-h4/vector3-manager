@@ -12,11 +12,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Image.asset(
-          'elba_img.png',
-          height: 50,
-          width: 50,
-        ),
+        title: const Text('Vector3'),
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.settings),
@@ -39,8 +35,16 @@ class _BuildHomePage extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: const <Widget>[
-          Power(),
-          Rotation(),
+          SizedBox(
+            height: 250,
+            width: 250,
+            child: Power(),
+          ),
+          SizedBox(
+            height: 250,
+            width: 250,
+            child: Rotation(),
+          ),
         ],
       ),
     );
