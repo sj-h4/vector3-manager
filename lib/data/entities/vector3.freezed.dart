@@ -19,9 +19,9 @@ class _$Vector3TearOff {
   const _$Vector3TearOff();
 
   _Vector3 call(
-      {double? power,
-      double? rotation,
-      String? deviceStatus,
+      {double power = 0.0,
+      double rotation = 0.0,
+      String deviceStatus = "No device",
       bool isConnected = false}) {
     return _Vector3(
       power: power,
@@ -37,9 +37,9 @@ const $Vector3 = _$Vector3TearOff();
 
 /// @nodoc
 mixin _$Vector3 {
-  double? get power => throw _privateConstructorUsedError;
-  double? get rotation => throw _privateConstructorUsedError;
-  String? get deviceStatus => throw _privateConstructorUsedError;
+  double get power => throw _privateConstructorUsedError;
+  double get rotation => throw _privateConstructorUsedError;
+  String get deviceStatus => throw _privateConstructorUsedError;
   bool get isConnected => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -51,10 +51,7 @@ abstract class $Vector3CopyWith<$Res> {
   factory $Vector3CopyWith(Vector3 value, $Res Function(Vector3) then) =
       _$Vector3CopyWithImpl<$Res>;
   $Res call(
-      {double? power,
-      double? rotation,
-      String? deviceStatus,
-      bool isConnected});
+      {double power, double rotation, String deviceStatus, bool isConnected});
 }
 
 /// @nodoc
@@ -76,15 +73,15 @@ class _$Vector3CopyWithImpl<$Res> implements $Vector3CopyWith<$Res> {
       power: power == freezed
           ? _value.power
           : power // ignore: cast_nullable_to_non_nullable
-              as double?,
+              as double,
       rotation: rotation == freezed
           ? _value.rotation
           : rotation // ignore: cast_nullable_to_non_nullable
-              as double?,
+              as double,
       deviceStatus: deviceStatus == freezed
           ? _value.deviceStatus
           : deviceStatus // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       isConnected: isConnected == freezed
           ? _value.isConnected
           : isConnected // ignore: cast_nullable_to_non_nullable
@@ -99,10 +96,7 @@ abstract class _$Vector3CopyWith<$Res> implements $Vector3CopyWith<$Res> {
       __$Vector3CopyWithImpl<$Res>;
   @override
   $Res call(
-      {double? power,
-      double? rotation,
-      String? deviceStatus,
-      bool isConnected});
+      {double power, double rotation, String deviceStatus, bool isConnected});
 }
 
 /// @nodoc
@@ -125,15 +119,15 @@ class __$Vector3CopyWithImpl<$Res> extends _$Vector3CopyWithImpl<$Res>
       power: power == freezed
           ? _value.power
           : power // ignore: cast_nullable_to_non_nullable
-              as double?,
+              as double,
       rotation: rotation == freezed
           ? _value.rotation
           : rotation // ignore: cast_nullable_to_non_nullable
-              as double?,
+              as double,
       deviceStatus: deviceStatus == freezed
           ? _value.deviceStatus
           : deviceStatus // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       isConnected: isConnected == freezed
           ? _value.isConnected
           : isConnected // ignore: cast_nullable_to_non_nullable
@@ -146,14 +140,20 @@ class __$Vector3CopyWithImpl<$Res> extends _$Vector3CopyWithImpl<$Res>
 
 class _$_Vector3 with DiagnosticableTreeMixin implements _Vector3 {
   const _$_Vector3(
-      {this.power, this.rotation, this.deviceStatus, this.isConnected = false});
+      {this.power = 0.0,
+      this.rotation = 0.0,
+      this.deviceStatus = "No device",
+      this.isConnected = false});
 
+  @JsonKey()
   @override
-  final double? power;
+  final double power;
+  @JsonKey()
   @override
-  final double? rotation;
+  final double rotation;
+  @JsonKey()
   @override
-  final String? deviceStatus;
+  final String deviceStatus;
   @JsonKey()
   @override
   final bool isConnected;
@@ -203,17 +203,17 @@ class _$_Vector3 with DiagnosticableTreeMixin implements _Vector3 {
 
 abstract class _Vector3 implements Vector3 {
   const factory _Vector3(
-      {double? power,
-      double? rotation,
-      String? deviceStatus,
+      {double power,
+      double rotation,
+      String deviceStatus,
       bool isConnected}) = _$_Vector3;
 
   @override
-  double? get power;
+  double get power;
   @override
-  double? get rotation;
+  double get rotation;
   @override
-  String? get deviceStatus;
+  String get deviceStatus;
   @override
   bool get isConnected;
   @override

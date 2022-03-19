@@ -14,7 +14,7 @@ class Power extends HookConsumerWidget {
       axes: <RadialAxis>[
         RadialAxis(minimum: 0, maximum: 500, pointers: <GaugePointer>[
           RangePointer(
-            value: power!,
+            value: power,
             width: 20,
             color: Colors.teal,
           ),

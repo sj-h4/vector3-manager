@@ -14,7 +14,7 @@ class Rotation extends HookConsumerWidget {
       axes: <RadialAxis>[
         RadialAxis(minimum: 60, maximum: 150, pointers: <GaugePointer>[
           RangePointer(
-            value: rotation!,
+            value: rotation,
             width: 20,
             color: Colors.teal,
           ),

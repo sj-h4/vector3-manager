@@ -8,7 +8,7 @@ class Vector3Status extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final deviceStatus = ref.watch(vector3ControllerProvider).deviceStatus;
     return Text(
-      '$deviceStatus',
+      deviceStatus,
       textAlign: TextAlign.center,
       overflow: TextOverflow.ellipsis,
       style: const TextStyle(fontWeight: FontWeight.bold),
