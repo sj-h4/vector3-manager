@@ -5,8 +5,8 @@ import 'dart:async';
 import '../entities/vector3.dart';
 import '../entities/vector3_profile.dart';
 
-class Vector3Repository {
-  Vector3Repository() : super();
+class Vector3RepositoryInterface {
+  Vector3RepositoryInterface() : super();
 
   final vector3StreamController = StreamController<Vector3>.broadcast();
   Vector3 vector3 = const Vector3(deviceStatus: "waiting", isConnected: false);
