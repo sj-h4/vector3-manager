@@ -5,7 +5,7 @@ import 'dart:async';
 import '../entities/vector3.dart';
 import '../entities/vector3_profile.dart';
 
-class Vector3RepositoryInterface {
+abstract class Vector3RepositoryInterface {
   Vector3RepositoryInterface() : super();
 
   final vector3StreamController = StreamController<Vector3>.broadcast();
@@ -15,8 +15,6 @@ class Vector3RepositoryInterface {
   final String charactaristicUUID =
       Vector3CharacteristicProfile.vector3Characteristic;
   FlutterBlue flutterBlue = FlutterBlue.instance;
-  late BluetoothDevice targetDevice;
-  late BluetoothCharacteristic bleCharactaristic;
 
   double power = 0;
   double rotation = 0;
@@ -27,79 +25,14 @@ class Vector3RepositoryInterface {
     vector3StreamController.close();
   }
 
-  Future<void> disconnectDevice() async {
-    vector3 = vector3.copyWith(deviceStatus: "waiting", isConnected: false);
-    if (!vector3StreamController.isClosed) {
-      vector3StreamController.sink.add(vector3);
-    }
-    targetDevice.disconnect();
-    flutterBlue.stopScan();
-    debugPrint("disconnected");
-  }
+  Future<void> disconnectDevice();
 
-  void startScan() {
-    flutterBlue.startScan(timeout: const Duration(seconds: 4));
-    debugPrint("deviceStatus: connecting");
-    vector3 = vector3.copyWith(deviceStatus: "scanning", isConnected: false);
-    if (!vector3StreamController.isClosed) {
-      vector3StreamController.sink.add(vector3);
-    }
-    // Listen to scan results
-    flutterBlue.scanResults.listen(
-      (results) {
-        // do something with scan results
-        for (ScanResult r in results) {
-          debugPrint(r.device.name);
-          if (r.device.name == deviceName) {
-            targetDevice = r.device;
-            connectToDevice();
-            flutterBlue.stopScan();
-            break;
-          }
-        }
-      },
-    );
-  }
+  void startScan();
 
-  void connectToDevice() async {
-    await targetDevice.connect();
-    discoverServices();
-  }
+  void connectToDevice();
 
-  void discoverServices() async {
-    debugPrint("discovering");
-    List<BluetoothService> services = await targetDevice.discoverServices();
-    for (BluetoothService s in services) {
-      debugPrint("service UUID: $s.uuid.toString");
-      if (s.uuid.toString() == serviceUUID) {
-        for (var charactaristic in s.characteristics) {
-          debugPrint("cahractaristic UUID: $charactaristic.uuid.toString()");
-
-          if (charactaristic.uuid.toString() == charactaristicUUID) {
-            bleCharactaristic = charactaristic;
-            vector3 = vector3.copyWith(
-              deviceStatus: "Connected: ${targetDevice.name}",
-              isConnected: true,
-            );
-            if (!vector3StreamController.isClosed) {
-              vector3StreamController.sink.add(vector3);
-            }
-            recieveNotification();
-          } else {
-            debugPrint("cannot");
-          }
-          debugPrint("connected service");
-        }
-      }
-    }
-  }
-
-  void recieveNotification() async {
-    await bleCharactaristic.setNotifyValue(true);
-    bleCharactaristic.value.listen((value) async {
-      bleRaw2Vector3(value);
-    });
-  }
+  void discoverServices();
+  void recieveNotification();
 
   void bleRaw2Vector3(value) {
     power = (value[3] * 256 + value[2]).toDouble();

@@ -16,8 +16,7 @@ class Vector3Controller extends StateNotifier<Vector3> {
           isConnected: false,
         ));
 
-  final Vector3RepositoryInterface _vector3repository =
-      Vector3RepositoryInterface();
+  final Vector3Repository _vector3repository = Vector3Repository();
 
   void getVector3Data() {
     _vector3repository.vector3StreamController.stream.listen((event) {
