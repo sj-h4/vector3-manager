@@ -7,6 +7,7 @@ class Vector3Repository extends Vector3RepositoryInterface {
   Vector3Repository() : super();
 
   final FlutterReactiveBle ble = FlutterReactiveBle();
+  final _devices = <DiscoveredDevice>[];
   late DiscoveredDevice targetDevice;
   late QualifiedCharacteristic bleCharactaristic;
 
