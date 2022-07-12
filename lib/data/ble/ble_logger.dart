@@ -1,4 +1,7 @@
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
+
+final bleLogger = Provider<BleLogger>(((_) => BleLogger()));
 
 class BleLogger {
   final List<String> _logMessages = [];

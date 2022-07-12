@@ -1,6 +1,12 @@
-import 'dart:async';
+import 'package:vector3_manager_app/ui/widgets/widgets.dart';
 
-import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
+import 'ble.dart';
+import 'ble_logger.dart';
+
+final connectorProvider = StreamProvider((ref) => BleDeviceConnector(
+        ble: ref.watch(ble), logMessage: ref.watch(bleLogger).addToLog)
+    ._deviceConnectionController
+    .stream);
 
 class BleDeviceConnector {
   BleDeviceConnector({
