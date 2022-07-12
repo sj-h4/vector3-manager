@@ -1,4 +1,17 @@
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:vector3_manager_app/data/ble/ble_logger.dart';
+
 import 'ble.dart';
+
+final serviceDiscoverer = Provider<BleDeviceInteractor>((ref) {
+  final _ble = ref.watch(ble);
+  final _logMessage = ref.watch(bleLogger).addToLog;
+  return BleDeviceInteractor(
+    bleDiscoverServices: _ble.discoverServices,
+    subscribeToCharacteristic: _ble.subscribeToCharacteristic,
+    logMessage: _logMessage,
+  );
+});
 
 class BleDeviceInteractor {
   BleDeviceInteractor({

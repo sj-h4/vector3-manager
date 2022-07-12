@@ -1,7 +1,22 @@
+import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:vector3_manager_app/data/ble/ble_connector.dart';
+import 'package:vector3_manager_app/data/ble/ble_scanner.dart';
 
 import '../../data/entities/vector3.dart';
 import '../../data/repositories/vector3_repository.dart';
+
+final vector3connection = StreamProvider((ref) {
+  ref
+      .watch(bleScanner)
+      .startScan([Uuid.parse("00001818-0000-1000-8000-00805f9b34fb")]);
+  ref.watch(scanResultProvider).listen((scanResult) {
+    final DiscoveredDevice? vector3 = scanResult.discoveredDevices
+        .firstWhere((device) => device.name == "V3 BLE:0442838");
+    ref.watch(bleConnector).connect(vector3!.id);
+  });
+  return ref.watch(connectorProvider);
+});
 
 final vector3ControllerProvider =
     StateNotifierProvider<Vector3Controller, Vector3>(

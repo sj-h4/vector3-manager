@@ -5,10 +5,16 @@ import 'package:vector3_manager_app/data/entities/ble_scanner_state.dart';
 
 import 'ble_logger.dart';
 
-final scannerProvider = StreamProvider((ref) =>
-    BleScanner(ble: ref.watch(ble), logMessage: ref.watch(bleLogger).addToLog)
-        ._stateStreamController
-        .stream);
+final bleScanner = Provider<BleScanner>((ref) {
+  final _ble = ref.watch(ble);
+  final _logMessage = ref.watch(bleLogger).addToLog;
+  return BleScanner(
+    ble: _ble,
+    logMessage: _logMessage,
+  );
+});
+final scanResultProvider =
+    Provider((ref) => ref.watch(bleScanner)._stateStreamController.stream);
 
 class BleScanner {
   BleScanner({

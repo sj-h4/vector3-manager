@@ -3,10 +3,16 @@ import 'package:vector3_manager_app/ui/widgets/widgets.dart';
 import 'ble.dart';
 import 'ble_logger.dart';
 
-final connectorProvider = StreamProvider((ref) => BleDeviceConnector(
-        ble: ref.watch(ble), logMessage: ref.watch(bleLogger).addToLog)
-    ._deviceConnectionController
-    .stream);
+final bleConnector = Provider((ref) {
+  final _ble = ref.watch(ble);
+  final _logMessage = ref.watch(bleLogger).addToLog;
+  return BleDeviceConnector(
+    ble: _ble,
+    logMessage: _logMessage,
+  );
+});
+final connectorProvider = Provider(
+    (ref) => ref.watch(bleConnector)._deviceConnectionController.stream);
 
 class BleDeviceConnector {
   BleDeviceConnector({
